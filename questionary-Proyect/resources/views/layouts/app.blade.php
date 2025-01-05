@@ -11,12 +11,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
-            @yield('header')
-            <main class="py-4">
-                @yield('content')
-            </main>
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
+            @yield('sidebar') <!-- Aquí se inyectará el sidebar solo en el dashboard -->
+            <div class="flex-1 ml-64"> <!-- Espacio para el contenido principal, con margen para el sidebar -->
+                @include('layouts.navigation')
+                @yield('header')
+                <main class="py-4">
+                    @yield('content')
+                </main>
+            </div>
         </div>
     </body>
 </html>
