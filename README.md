@@ -24,7 +24,7 @@ Before running the application locally, ensure you have the following installed:
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/questionary.git
+git clone https://github.com/leandro16197/questionary.git
 cd questionary
 ```
 ### 2. Set up Docker containers
