@@ -1,17 +1,11 @@
-@extends('layouts.app')
-
-@section('header')
-@section('title', 'questionary')
-@endsection
-
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
 @endpush
 
-@section('content')
-<div class="contenedor-principal d-flex align-items-stretch" style="min-height: 100vh;">
-    <div class="sidebar bg-dark text-white p-4 d-flex flex-column">
-        <h4 class="text-center mb-4">Menu</h4>
+<div class="sidebar bg-dark text-white p-4">
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-white p-4 d-flex flex-column" style="width: 260px; height: 100vh;">
+        <h4 class="text-center mb-4">Dashboard</h4>
         <ul class="nav flex-column">
             <li class="nav-item mb-3">
                 <a href="#" class="nav-link text-white d-flex align-items-center py-3 px-3 rounded">
@@ -31,32 +25,14 @@
         </ul>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content flex-grow-1 p-4">
-        @include('questionary.form-add-questionary', ['generos' => $generos])
-    </div>
 </div>
-@endsection
+
 <style>
-    .main-content {
-        margin-left: 20%;
-    }
-
-    .contenedor-principal {
-        margin-top: -1.2% !important;
-    }
-
-    .d-flex.align-items-stretch {
-        display: flex;
-        align-items: stretch;
-    }
-
-    /* Sidebar */
     .sidebar {
         background-color: #212529; /* Fondo oscuro */
-        width: 260px;
         border-right: 1px solid #444;
         box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
     }
 
     .sidebar h4 {
@@ -100,14 +76,31 @@
         color: #f8f9fa;
     }
 
-    /* Responsiveness: Hide sidebar on small screens */
-    @media (max-width: 800px) {
+    /* Responsividad */
+    @media (max-width: 768px) {
         .sidebar {
-            display: none;
+            width: 70px;
+            padding: 15px;
         }
 
-        .main-content {
-            margin-left: 0;
+        .sidebar h4 {
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .nav-link {
+            font-size: 0;
+            padding: 15px;
+            justify-content: center;
+        }
+
+        .nav-link i {
+            font-size: 1.5rem;
+            margin-right: 0;
+        }
+
+        .nav-link:hover {
+            transform: none;
         }
     }
 </style>
