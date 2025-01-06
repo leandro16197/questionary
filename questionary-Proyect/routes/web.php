@@ -6,6 +6,9 @@ use App\Http\Controllers\QuestionaryController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -14,11 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/questionary', [QuestionaryController::class, 'store'])->name('questionary.store');
     Route::get('/dashboard', [GenerosController::class, 'getGeneros'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-    Route::get('/', function () {
-        return redirect('/dashboard');
-    });
-    
+    ->name('dashboard');    
 });
 
 require __DIR__.'/auth.php';
