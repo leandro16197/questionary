@@ -32,16 +32,13 @@
         background-color: #212529; /* Fondo oscuro */
         border-right: 1px solid #444;
         box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
+
     }
 
     .sidebar h4 {
         font-size: 1.5rem;
         font-weight: bold;
         color: #ffffff;
-        margin-bottom: 30px;
-        border-bottom: 2px solid #444;
-        padding-bottom: 10px;
     }
 
     .nav-link {

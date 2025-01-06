@@ -3,7 +3,6 @@
 @section('header')
 @section('title', 'questionary')
 @endsection
-
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
 @endpush
@@ -39,7 +38,7 @@
 @endsection
 <style>
     .main-content {
-        margin-left: 20%;
+        margin-left: 5%;
     }
 
     .contenedor-principal {
@@ -63,7 +62,7 @@
         font-size: 1.5rem;
         font-weight: bold;
         color: #ffffff;
-        margin-bottom: 30px;
+        margin-bottom: 0 !important;
         border-bottom: 2px solid #444;
         padding-bottom: 10px;
     }
