@@ -2,18 +2,12 @@
     width: 100% !important;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
-.contenedor-principal {
-    margin-top: -1.2% !important;
-}
+
 .sidebar {
     margin-top: -0.5%;
 }
 .main-content {
     margin-left: 5%;
-}
-
-.contenedor-principal {
-    margin-top: -1.2% !important;
 }
 
 .d-flex.align-items-stretch {
@@ -22,44 +16,37 @@
 
 /*footer*/
 .footer-style{
-
     background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }
 footer {
     margin-top: -16px;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
     color: #6c757d;
-  }
-  
-  footer .col-md-4 {
+}
+footer .col-md-4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-  }
-  
-  footer .texto-footer {
+}
+footer .texto-footer {
     text-align: center;
     flex: 1;
     margin-right: 0;
-  }
-  
-  footer .nav {
+}
+footer .nav {
     justify-content: center;
     margin-top: 1rem;
-  }
-  
-  footer .nav a {
+}
+footer .nav a {
     color: #6c757d;
     transition: color 0.3s ease;
-  }
-  
-  footer .nav a:hover {
+}
+footer .nav a:hover {
     color: #007bff;
-  }
-  
+}
 
-/*fin Footer*/  
+/*fin Footer*/
 /*formularios dashboard*/
 
 label {
@@ -109,12 +96,12 @@ button.btn-primary:hover {
 
 .form-questionary {
     background-color: #6b778348;
-    padding: 40px;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 700px;
     transition: box-shadow 0.3s ease;
+    padding-top: 20px !important;
 }
 .form-questionary label{
     color: white !important;
@@ -122,7 +109,6 @@ button.btn-primary:hover {
 form:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
-
 
 .responses-container .row {
     margin-bottom: 15px;
@@ -133,7 +119,6 @@ form:hover {
     align-items: center;
     gap: 10px;
 }
-
 
 .addPreguntas {
     font-family: 'Arial', sans-serif;
@@ -156,19 +141,33 @@ form:hover {
     border-radius: 2px;
 }
 
-
 .general {
     display: flex;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: center; 
+    align-items: center;
 }
 
+.form-preguntas{
+    margin-left: -2% !important;
+}
+.addGenero-nombre{
+    margin-left: 5px !important;
+}
 
 .addGenero,
 .form-preguntas {
-    width: 48%; 
+    width: 100% !important; 
 }
-
+.questionary_genero {
+    padding: 40px; 
+}
+.addGenero{
+    margin-left: 10% !important;
+}
+.addGenero-nombre{
+    margin-left: 30% !important;
+}
 
 @media (max-width: 768px) {
     .responses-container .col-md-6 {
@@ -187,7 +186,6 @@ form:hover {
         padding: 14px 28px;
     }
 
-
     .general {
         flex-direction: column;
         align-items: center;
@@ -198,10 +196,13 @@ form:hover {
         width: 100%; 
     }
 
+    .addGenero{
+        margin-left:0 !important;
+    }
 }
 /*fin formularios*/
 /*sidebar*/
- 
+
 .sidebar {
     background-color: #212529; 
     width: 260px;
@@ -262,13 +263,12 @@ form:hover {
 /*fin-sidebar*/
 
 /*estilo tabla questionList*/
-.contenedorQuestionList{
-    height: 100%;
-}
+
 .table-style {
     margin-top: 3%;
-    margin-left: 1%;
+    margin-left: 5%;
     margin-right: 1%;
+    margin-bottom: 2%;
     width: 90%;
 }
 
@@ -325,7 +325,6 @@ form:hover {
     color: white !important;
 }
 
-
 .paginate_button.previous, 
 .paginate_button.next {
     color: white !important;  
@@ -335,7 +334,6 @@ form:hover {
     color: white !important;
     background: #007bff3f !important;
 }
-
 
 .paginate_button.previous.disabled, 
 .paginate_button.next.disabled {
@@ -406,27 +404,41 @@ div .responses-container form .form-modificar-style{
 /* Ajustes generales para el modal */
 #deleteModal .modal-content {
     border-radius: 8px;
-    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.85);
 }
 
-/* Ajustes específicos para pantallas pequeñas */
-@media (max-width: 768px) {
-    #deleteModal .modal-dialog {
-        margin: 10px; 
-        width: 90%;
-    }
-
-    #deleteModal .modal-header, 
-    #deleteModal .modal-footer {
-        text-align: center;
-    }
-
-    #deleteModal .modal-footer .btn {
-        width: 100%; 
-        margin-bottom: 10px; 
-    }
+#deleteModal .modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
 }
-.modal-content{
-    background-color: #2c4157e0 !important;
-    color: white !important;
+
+#deleteModal .modal-body {
+    color: white;
+    background-color: #343a40;
+}
+
+/* Estilo de los botones del modal */
+#deleteModal .btn-danger {
+    background-color: #dc3545;
+    border-color: #c82333;
+    color: white;
+    border-radius: 8px;
+}
+
+#deleteModal .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+#deleteModal .btn-secondary {
+    background-color: #6c757d;
+    border-color: #5a6268;
+    color: white;
+    border-radius: 8px;
+}
+
+#deleteModal .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #4e555b;
 }
