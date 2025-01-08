@@ -9,10 +9,7 @@
 @endpush
 
 @section('content')
-<div class="contenedorQuestionList contenedor-principal d-flex">
-    <div class="sidebar">
-        @include('layouts.sidebar')
-    </div>
+<div class="general contenedorQuestionList contenedor-principal d-flex">
     <div class="table-style">
         @if(session('message'))
         <div class="alert alert-success">
@@ -47,12 +44,15 @@
 
 
 </div>
-<div class="modal fade modal-modificar-questiona" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="modalModificarLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<!--Modal-->
+<div class="modal-modificar-questiona modal" tabindex="-1" role="dialog" id="modalModificar">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalModificarLabel">Modificar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Modificar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div id="response-container">
@@ -65,12 +65,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Modal Eliminar-->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
