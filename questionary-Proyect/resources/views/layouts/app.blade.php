@@ -8,12 +8,17 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="{{asset('/css/style.css')}}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="body-style font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
-            @yield('sidebar') <!-- Aquí se inyectará el sidebar solo en el dashboard -->
-            <div class="flex-1 ml-64"> <!-- Espacio para el contenido principal, con margen para el sidebar -->
+            @yield('sidebar') 
+            <div class="flex-1 ml-64"> 
                 @include('layouts.navigation')
                 @yield('header')
                 <main class="py-4">
@@ -21,5 +26,7 @@
                 </main>
             </div>
         </div>
+        @include('layouts.footer')
+        @stack('scripts')
     </body>
 </html>

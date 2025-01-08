@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Generos;
 
 class Question extends Model
 {
@@ -14,8 +15,14 @@ class Question extends Model
         'genero_id'
     ];
     
-    public function responses()
+
+        public function responses()
     {
-        return $this->hasMany(Response::class);
+        return $this->hasMany(Response::class, 'question_id');
+    }
+
+    public function genero()
+    {
+        return $this->belongsTo(Generos::class, 'genero_id');
     }
 }
