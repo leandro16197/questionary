@@ -18,10 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/questionary', [QuestionaryController::class, 'store'])->name('questionary.store');
     Route::get('/addQuestion', [GenerosController::class, 'getGeneros'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');    
+    ->name('addQuestion');  // Asegúrate de que el nombre sea 'addQuestion'
+ 
     Route::get('/questions/data', [QuestionaryController::class, 'getQuestionsData'])->name('questions.data');
     Route::get('/dato/{id}',[QuestionaryController::class,'datoById']);
-    Route::get('/listQuestions', [QuestionaryController::class, 'index']); 
+    Route::get('/listQuestions', [QuestionaryController::class, 'index'])->name('listQuestions'); 
     Route::post('/modificar', [QuestionaryController::class, 'update']);
     Route::delete('/eliminar-questionary/{id}', [QuestionaryController::class, 'destroy'])->name('questionary.destroy');
 

@@ -28,17 +28,24 @@ $(document).ready(function () {
             data: null,
             render: function (data, type, row) {
                 return `
-                      <button class="btn btn-danger btn-eliminar" data-id="${row.id}">
-    <i class="fa fa-trash"></i>
-</button>
-                        <button class="btn btn-modificar btn-modificar" data-id="${row.id}"><i class="fa fa-edit"></i></button>
-                            `;
+                    <button class="btn btn-danger btn-eliminar" data-id="${row.id}">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button class="btn btn-modificar btn-modificar" data-id="${row.id}">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                `;
             },
             orderable: false,
             searchable: false
-        }
-        ]
+        }]
     });
+
+    // Forzar la recalculación del ajuste responsivo al redimensionar
+    $(window).on('resize', function () {
+        table.responsive.recalc();
+    });
+
 
     $('.table-dataTable').on('click', '.btn-modificar', function () {
         var id = $(this).data('id');
@@ -113,13 +120,13 @@ $(document).ready(function () {
     });
     $(document).ready(function () {
         let questionId = null;
-    
+
 
         $(document).on('click', '.btn-eliminar', function () {
-            questionId = $(this).data('id'); 
+            questionId = $(this).data('id');
             $('#deleteModal').modal('show');
         });
-    
+
         $('#confirmDelete').click(function () {
             if (questionId !== null) {
                 $.ajax({
@@ -128,23 +135,23 @@ $(document).ready(function () {
                     data: {
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function(response) {
-                        if(response.status === 'success') {
+                    success: function (response) {
+                        if (response.status === 'success') {
                             $('#deleteModal').modal('hide');
-                            table.ajax.reload(null, false); 
+                            table.ajax.reload(null, false);
 
                         } else {
                             alert(response.message);
                         }
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.log('Hubo un error al intentar eliminar la pregunta.');
                         console.log(xhr.responseText);
                     }
                 });
             }
         });
-        
+
     });
-    
+
 });
