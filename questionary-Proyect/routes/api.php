@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\generosController;
+use App\Http\Controllers\GenerosController;
+
 
 Route::get('/generos',[generosController::class,'index']);
 
@@ -10,6 +11,8 @@ Route::get('/generos/{id}', [generosController::class,'show']);
 
 Route::post('/generos', [generosController::class,'store']);
 
-Route::put('/generos/{id}', [generosController::class,'update']);
+Route::put('/generos/{id}', [GenerosController::class, 'update']);
+
+
 
 Route::delete('/generos/{id}', [GenerosController::class, 'delete']);

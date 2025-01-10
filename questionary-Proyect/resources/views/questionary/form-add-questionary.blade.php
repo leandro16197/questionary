@@ -1,3 +1,11 @@
+@push('styles')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('node_modules/datatables.net-dt/css/jquery.dataTables.css') }}">
+
+@endpush
 <div class="general">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch"> <!-- Cambié align-items-start a align-items-stretch -->
         <!-- Formulario de agregar pregunta -->
@@ -57,20 +65,83 @@
 
         <!-- Formulario de agregar género -->
         <div class="addGenero order-1 order-md-2 mt-0"> <!-- Cambié mt-4 a mt-0 para evitar el desplazamiento -->
-            <h1 class="addPreguntas">Agregar Género</h1>
-            <form class="form-questionary questionary_genero" id="addGeneroForm">
-                <div class="mb-3">
-                    <label class="addGenero-nombre" for="name">Nombre del Género:</label>
-                    <input type="text" id="name" name="name" class="form-control" required>
-                </div>
+            <div class="generos">
+                <h1 class="addPreguntas">Agregar Género</h1>
+                <form class="form-questionary questionary_genero" id="addGeneroForm">
+                    <div class="mb-3">
+                        <label class="addGenero-nombre" for="name">Nombre del Género:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Agregar Género</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Agregar Género</button>
+                </form>
+            </div>
+            <div class="table-generos-style">
+                <table class="table-generos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para modificar -->
+<div class="modal fade" id="modalModificarGenero" tabindex="-1" aria-labelledby="modalModificarGeneroLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalModificarGeneroLabel">Modificar Género</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                @csrf
+                    <input type="hidden" id="genero-id">
+                    <div class="form-group">
+                        <label for="genero-name">Nombre del Género</label>
+                        <input type="text" id="genero-name" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="guardar-cambios" type="button" class="btn btn-primary">Guardar Cambios</button>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- Modal para eliminar -->
+<div class="modal fade" id="modalEliminarGenero" tabindex="-1" aria-labelledby="modalEliminarGeneroLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEliminarGeneroLabel">Eliminar Género</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <!-- El contenido de la pregunta de eliminación se cargará aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger btn-confirmar-eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/edit_update.js') }}"></script>
+@endpush
 <script>
     document.getElementById('addGeneroForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -116,21 +187,18 @@
         fetch('api/generos')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+
 
                 const select = document.getElementById('genero_id');
                 select.innerHTML = '<option value="">Seleccionar género</option>';
 
-                if (Array.isArray(data)) {
-                    data.forEach(genero => {
-                        const option = document.createElement('option');
-                        option.value = genero.id;
-                        option.textContent = genero.name;
-                        select.appendChild(option);
-                    });
-                } else {
-                    console.log('Error: La respuesta no contiene una lista de géneros', data);
-                }
+
+                data.data.forEach(genero => {
+                    const option = document.createElement('option');
+                    option.value = genero.id;
+                    option.textContent = genero.name;
+                    select.appendChild(option);
+                });
             })
             .catch(error => console.error('Error al cargar los géneros:', error));
     });
