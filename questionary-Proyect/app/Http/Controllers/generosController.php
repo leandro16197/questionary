@@ -15,22 +15,34 @@ class generosController extends Controller
             'generos'=>$generos,
         ]);
     }
+    public function index(Request $request)
+    {
+        $query = Generos::query();
+    
+        $start = $request->input('start', 0);
+        $length = $request->input('length', 10);
+        $search = $request->input('search.value', '');
+        $draw = (int) $request->input('draw', 1);
+    
 
-    function index(){
-        $generos=Generos::all();
-
-        if($generos->isEmpty()){
-            $data=[
-                'message' => 'no se encontraron estudiantes',
-                'status' => '404'
-            ];
-
-            return response()->json($data,404);
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
         }
-
-        return response()->json($generos,200);
+    
+ 
+        $recordsFiltered = $query->count();
+    
+        $data = $query->skip($start)->take($length)->get();
+    
+        return response()->json([
+            'draw' => $draw, 
+            'recordsTotal' => Generos::count(),
+            'recordsFiltered' => $recordsFiltered, 
+            'data' => $data, 
+        ]);
     }
-
+    
+    
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -111,32 +123,18 @@ class generosController extends Controller
         return response()->json($data, 200);
     }
 
-    function update(Request $request,$id){
-        $genero = Generos::find($id);
-    
+    public function update(Request $request, $id)
+{
+    $genero = Generos::find($id);
 
-        if (!$genero) {
-            $data = [
-                'message' => 'Género no encontrado',
-                'status' => '400'
-            ];
-            return response()->json($data, 400); 
-        }
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255', 
-        ]);
-
-        $genero->name=$request->name;
-        $genero->save();
-    
-        $data = [
-            'message' => 'Género actualizado',
-            'name'=>$genero->name,
-            'status' => '200'
-        ];
-
-        return response()->json($data,200);
+    if (!$genero) {
+        return response()->json(['message' => 'Género no encontrado'], 404);
     }
-    
+
+    $genero->name = $request->input('nombre');
+    $genero->save();
+
+    return response()->json(['message' => 'Género actualizado con éxito', 'genero' => $genero]);
+}
+
 }

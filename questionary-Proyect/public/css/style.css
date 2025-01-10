@@ -463,3 +463,7 @@ div .responses-container form .form-modificar-style{
         display: none !important;
     }
 }
+/*tabla generos*/
+.table-generos-style{
+    margin-top: 5% !important;
+}
