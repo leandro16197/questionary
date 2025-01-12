@@ -29,22 +29,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Validación de los campos
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'username' => ['required', 'string', 'max:255', 'unique:' . User::class],
+            'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048']
         ]);
+        // Subir la imagen de perfil (si está presente)
+        $profilePicturePath = null;
+        if ($request->hasFile('profile_picture')) {
+            $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public'); // 'profile_pictures' es el directorio de almacenamiento
+        }
+        
 
+        // Crear el usuario
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'username' => $request->username,
+            'profile_picture' => $profilePicturePath, 
         ]);
 
+        // Disparar el evento de registro
         event(new Registered($user));
 
+        // Iniciar sesión automáticamente al usuario recién registrado
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirigir al usuario al dashboard o ruta deseada
+        return redirect()->route('listQuestions'); // Asegúrate de que esta ruta esté definida en las rutas de tu aplicación
     }
 }
