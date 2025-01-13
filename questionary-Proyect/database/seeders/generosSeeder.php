@@ -21,6 +21,7 @@ class generosSeeder extends Seeder
             ['name' => 'Literatura'],
             ['name' => 'Medicina'],
             ['name' => 'Politica'],
+            ['name' => 'nexGenero'],
         ];
 
         DB::table('generos')->insert($generos);
