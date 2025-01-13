@@ -20,7 +20,8 @@ class ClearQuestionsResponsesSeeder extends Seeder
  
          // Borrar los registros de la tabla questions
          DB::table('questions')->truncate();
- 
+          // Borrar los registros de la tabla generos
+         DB::table('generos')->truncate();
          // Habilitar nuevamente las restricciones de claves foráneas
          DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

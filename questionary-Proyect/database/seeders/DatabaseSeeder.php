@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(ClearQuestionsResponsesSeeder::class); para limpiar en caso de error 
         $this->call(generosSeeder::class);//carga generos
         $this->call(Questions::class);//carga preguntas
-        $this->call(Response::class);//carga respuestas
+        $this->call(Responses::class);//carga respuestas
 
     }
 }
