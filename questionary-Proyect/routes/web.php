@@ -3,13 +3,15 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\generosController;
 use App\Http\Controllers\QuestionaryController;
-
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
-    return redirect('/login');
+    return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,10 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/listQuestions', [QuestionaryController::class, 'index'])->name('listQuestions'); 
     Route::post('/modificar', [QuestionaryController::class, 'update']);
     Route::delete('/eliminar-questionary/{id}', [QuestionaryController::class, 'destroy'])->name('questionary.destroy');
-
-
-
-
 
 });
 

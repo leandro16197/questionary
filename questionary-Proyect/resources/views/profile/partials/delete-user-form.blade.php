@@ -1,55 +1,89 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Delete Account') }}
-        </h2>
+<section class="space-y-6" x-data="{ open: false }">
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
-
+    <!-- Botón para abrir el modal -->
     <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+        x-on:click.prevent="open = true" 
+        class="btn btn-danger border-none"
+    >
+        {{ __('Eliminar ') }}
+    </x-danger-button>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-            @csrf
-            @method('delete')
+    <!-- Modal -->
+    <div x-show="open" @click.away="open = false" x-transition class=" fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class="p-6 rounded-lg w-1/3">
+            <form method="post" action="{{ route('profile.destroy') }}" class="p-6 form-group">
+                @csrf
+                @method('delete')
 
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
+                <h2 class="centered-text text-lg font-medium text-gray-900 dark:text-gray-100">
+                    {{ __('¿Estás seguro de que deseas eliminar tu cuenta?') }}
+                </h2>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
+                <p class=" centered-text mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    {{ __('Una vez que tu cuenta sea eliminada, todos sus recursos y datos serán eliminados permanentemente. Por favor ingresa tu contraseña para confirmar que deseas eliminar tu cuenta de forma permanente.') }}
+                </p>
 
-            <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+                <div class="input-pass mt-6">
+                    <x-input-label for="password" value="{{ __('Contraseña') }}" class="sr-only" />
 
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
+                    <x-text-input
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="mt-1 block w-3/4 input-style"
+                        placeholder="{{ __('Contraseña') }}"
+                    />
 
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-            </div>
+                    <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                </div>
 
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="open = false" class="btn btn-style border-none">
+                        {{ __('Cancelar') }}
+                    </x-secondary-button>
 
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
-            </div>
-        </form>
-    </x-modal>
+                    <x-danger-button class="btn btn-danger border-none">
+                        {{ __('Eliminar') }}
+                    </x-danger-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
+
+<style>
+    .btn-danger {
+        border: inherit !important;
+    }
+    .input-style {
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        font-size: 1rem;
+        color: #333;
+        width: 100%;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+
+    .input-style:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    }
+
+    .input-style::placeholder {
+        color: #a0aec0;
+    }
+    .input-pass{
+        margin-bottom: 2%;
+    }
+    .btn-style{
+        background-color: #007bff !important;
+        color: white;
+    }
+
+</style>
