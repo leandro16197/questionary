@@ -1,0 +1,84 @@
+.navbar {
+  background: linear-gradient(to right, #ff9c2b, #c2e9fb);
+  height: 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contenedor-pantallas-cichas{
+  width: 100%;
+  height: 110px !important;
+}
+
+.navbar-brand {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.style-logo {
+  width: 100px;
+  height: auto;
+  border-radius: 50px;
+  margin-left: 10px;
+}
+.center-title {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centra verticalmente */
+  width: 100%; 
+  height: 110px;
+  overflow: hidden; /* Evita que la imagen se deforme */
+}
+
+
+.questioanry-logo {
+  width: 50% !important;
+  height: 110px;
+
+}
+
+
+.sidebar {
+  height: calc(100vh - 56px);
+  position: fixed;
+  top: 110px;
+  width: 280px;
+  background-color: var(--bs-dark) !important;
+}
+
+@media (max-width: 1000px) {
+  .div-logo {
+    display: none;
+  }
+  .contenedor-pantallas-cichas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    margin-top: -7% !important;
+  }
+  .center-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+
+  .hamburguesa {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+  }
+
+  .questioanry-logo {
+    width: 300px !important;
+    height: auto;
+  }
+
+  .navbar-toggler {
+    margin: 0;
+  }
+}
