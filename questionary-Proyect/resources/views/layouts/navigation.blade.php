@@ -21,7 +21,7 @@
               <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="/listQuestion">Lista de Preguntas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="/game">Game</a>
+              <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="/home">Game</a>
             </li>
           </ul>
 

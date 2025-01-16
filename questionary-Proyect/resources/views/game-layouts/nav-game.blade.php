@@ -18,7 +18,7 @@
 </nav>
 
 <!-- Sidebar Offcanvas -->
-<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+<div class=" offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Sidebar</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -30,98 +30,74 @@
           <svg class="bi me-2" width="16" height="16">
             <use xlink:href="#home"></use>
           </svg>
-          Home
+          inicio
         </a>
       </li>
       <li>
+        @if(Auth::user() && Auth::user()->rol==1)
+      <li>
         <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#speedometer2"></use>
-          </svg>
-          Dashboard
+          <i class="fa-solid fa-user-cog me-2"></i> Admin
         </a>
+      </li>
+      @endif
       </li>
       <li>
         <a href="#" class="nav-link text-white">
           <svg class="bi me-2" width="16" height="16">
             <use xlink:href="#table"></use>
           </svg>
-          Orders
+          Ranking
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#grid"></use>
-          </svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#people-circle"></use>
-          </svg>
-          Customers
-        </a>
+        <div class="text-center mt-5">
+          <a href="/play" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-play me-2"></i> Jugar ahora
+          </a>
+        </div>
       </li>
     </ul>
   </div>
 </div>
-
 <!-- Sidebar para pantallas grandes -->
 <div class="sidebar d-none d-lg-block">
-  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi me-2" width="40" height="32">
-        <use xlink:href="#bootstrap"></use>
-      </svg>
-      <span class="fs-4">Sidebar</span>
+  <div class="style-sidebar-game d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <i class="fa-solid fa-bars me-2" style="font-size: 1.5rem;"></i>
+      <span class="fs-4">Menú</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#home"></use>
-          </svg>
-          Home
+        <a href="#" class="nav-link text-white" aria-current="page">
+          <i class="fa-solid fa-house me-2"></i> Inicio
+        </a>
+      </li>
+      <li>
+        @if(Auth::user() && Auth::user()->rol==1)
+      <li>
+        <a href="/addQuestion" class="nav-link text-white">
+          <i class="fa-solid fa-user-cog me-2"></i> Admin
+        </a>
+      </li>
+      @endif
+      </li>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <i class="fa-solid fa-chart-line me-2"></i> Ranking
+        </a>
+      </li>
+      <li>
+        <a href="/play" class="nav-link text-white">
+          <i class="fa-solid fa-play me-2"></i> Jugar ahora
         </a>
       </li>
       <li>
         <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#speedometer2"></use>
-          </svg>
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#table"></use>
-          </svg>
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#grid"></use>
-          </svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#people-circle"></use>
-          </svg>
-          Customers
+          <i class="fa-solid fa-user me-2"></i> Perfil
         </a>
       </li>
     </ul>
   </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
