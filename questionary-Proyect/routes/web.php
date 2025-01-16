@@ -17,14 +17,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/questionary', [QuestionaryController::class, 'store'])->name('questionary.store');
     Route::get('/addQuestion', [GenerosController::class, 'getGeneros'])
-    ->middleware(['auth', 'verified'])
-    ->name('addQuestion');
- 
+        ->middleware(['auth', 'verified'])
+        ->name('addQuestion');
+
     Route::get('/questions/data', [QuestionaryController::class, 'getQuestionsData'])->name('questions.data');
-    Route::get('/dato/{id}',[QuestionaryController::class,'datoById']);
-    Route::get('/listQuestions', [QuestionaryController::class, 'index'])->name('listQuestions'); 
+    Route::get('/dato/{id}', [QuestionaryController::class, 'datoById']);
+    Route::get('/listQuestions', [QuestionaryController::class, 'index'])->name('listQuestions');
     Route::post('/modificar', [QuestionaryController::class, 'update']);
     Route::delete('/eliminar-questionary/{id}', [QuestionaryController::class, 'destroy'])->name('questionary.destroy');
-    Route::get('/home',[GameController::class,'index']);
+    Route::get('/home', [GameController::class, 'index']);
+    Route::get('/play', [GameController::class, 'play']);
+    Route::post('/submit-answer', [GameController::class, 'submitAnswer'])
+    ->middleware('auth')
+    ->name('submit.answer');
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

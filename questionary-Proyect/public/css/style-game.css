@@ -1,44 +1,90 @@
+/* Estilos generales del body */
+body {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Contenedor principal */
+.container {
+  background: rgba(39, 23, 110, 0.123);
+  border-radius: 10px;
+  margin-bottom: 3px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar - Fijo en la parte superior */
 .navbar {
-  background: linear-gradient(to right, #ff9c2b, #c2e9fb);
+  background: linear-gradient(to right, #744fda, #6d90a0);
   height: 110px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
-.contenedor-pantallas-cichas{
+
+/* Estilo de los enlaces en el sidebar */
+.sidebar .nav-link {
+  margin-bottom: 20px;
+  font-size: 23px !important;
+}
+
+/* Efecto hover en los enlaces del sidebar */
+.sidebar .nav-link:hover {
+  background: linear-gradient(to right, #744fda, #6d90a0);
+  color: #fff;
+  border-radius: 5px;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor de las pantallas */
+.contenedor-pantallas-cichas {
   width: 100%;
   height: 110px !important;
 }
 
+/* Estilo para el sidebar */
+.style-sidebar-game {
+  height: 100% !important;
+}
+
+/* Estilo de la marca (logo en el navbar) */
 .navbar-brand {
   color: #333;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
+/* Estilo del logo */
 .style-logo {
   width: 100px;
   height: auto;
   border-radius: 50px;
   margin-left: 10px;
 }
+
+/* Estilo para centrar el título */
 .center-title {
   display: flex;
   justify-content: center;
-  align-items: center; /* Centra verticalmente */
-  width: 100%; 
+  align-items: center;
+  width: 100%;
   height: 110px;
-  overflow: hidden; /* Evita que la imagen se deforme */
+  overflow: hidden;
 }
 
-
+/* Estilo del logo en el cuestionario */
 .questioanry-logo {
   width: 50% !important;
   height: 110px;
-
 }
 
-
+/* Sidebar con altura ajustada */
 .sidebar {
   height: calc(100vh - 56px);
   position: fixed;
@@ -47,10 +93,14 @@
   background-color: var(--bs-dark) !important;
 }
 
+/* Estilos responsivos para pantallas menores de 1000px */
 @media (max-width: 1000px) {
+  /* Ocultar logo en pantallas pequeñas */
   .div-logo {
     display: none;
   }
+
+  /* Estilo para el contenedor de pantallas */
   .contenedor-pantallas-cichas {
     display: flex;
     justify-content: space-between;
@@ -59,6 +109,8 @@
     padding: 0 10px;
     margin-top: -7% !important;
   }
+
+  /* Ajustar la visibilidad y alineación del centro */
   .center-title {
     display: flex;
     justify-content: center;
@@ -66,19 +118,165 @@
     flex: 1;
   }
 
+  /* Estilo para la hamburguesa del menú */
   .hamburguesa {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
   }
 
+  /* Ajuste del tamaño del logo */
   .questioanry-logo {
     width: 300px !important;
     height: auto;
   }
 
+  /* Ajuste de margen en el navbar-toggler */
   .navbar-toggler {
     margin: 0;
+  }
+}
+
+/* Ajuste para el contenedor con pantallas grandes */
+.min-h-screen {
+  margin-left: 300px;
+  margin-right: 20px;
+  flex: 1;
+}
+
+/* Estilo para las imágenes redondeadas */
+.img-fluid {
+  border-radius: 50%;
+}
+
+/* Estilos para el cuestionario de /play */
+.question h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Estilo para las respuestas */
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Estilo para las etiquetas de las opciones */
+.question{
+  padding-top: 10px;
+}
+.form-check-label {
+  font-size: 18px;
+}
+
+/* Estilo del botón principal */
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Estilo para los inputs de las respuestas */
+.form-check-input {
+  margin-right: 10px;
+}
+/* Aseguramos que el contenedor de las respuestas se centre */
+.answers {
+  display: flex;
+  flex-direction: column; /* Coloca las respuestas en una columna */
+  align-items: center; /* Centra las respuestas horizontalmente */
+  justify-content: center; /* Alinea las respuestas verticalmente en el centro */
+  gap: 15px; /* Espaciado entre las respuestas */
+  margin-top: 20px; /* Da un poco de espacio entre el título y las respuestas */
+}
+
+/* Aseguramos que el título también esté centrado */
+.question {
+  text-align: center;
+  margin-bottom: 20px; /* Da espacio debajo del título */
+}
+
+/* Estilo para las opciones de respuesta */
+.answer-option {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 200px;  /* Establece un tamaño fijo para las opciones */
+  height: 65px;  /* Establece una altura consistente */
+}
+
+/* Efecto hover en las opciones de respuesta */
+.answer-option:hover {
+  background-color: #f0f0f0;
+}
+
+/* Efecto active (al hacer clic) en las opciones de respuesta */
+.answer-option:active {
+  background-color: #ddd;
+}
+
+/* Estilo para la respuesta incorrecta */
+.answer-option.incorrect {
+  background-color: red;
+  color: white;
+}
+
+/* Estilo para la respuesta correcta */
+.answer-option.correct {
+  background-color: green;
+  color: white;
+}
+.style-container-play{
+  width: 60% !important;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 900px) {
+  .style-container-play {
+    width: 90% !important; /* Hace que el contenedor ocupe un 90% del ancho en pantallas pequeñas */
+  }
+  .min-h-screen{
+   margin-left: 20px !important;
+  }
+  .container{
+    width: 100% !important;
+  }
+  /* Ajusta el tamaño del título */
+  .question h2 {
+    font-size: 20px;
+  }
+
+
+  .answer-option {
+    width: 200px !important; 
+    height: 65px !important;
+    font-size: 16px;
+  }
+
+  /* Ajuste de espaciado entre las respuestas */
+  .answers {
+    gap: 12px;
+  }
+}
+
+/* Media query para pantallas muy pequeñas (teléfonos muy pequeños) */
+@media (max-width: 480px) {
+  .question h2 {
+    font-size: 18px; /* Reduce aún más el tamaño del título */
+  }
+
+  .answer-option {
+    font-size: 14px; /* Disminuye el tamaño de la fuente de las opciones */
+    padding: 8px 15px; /* Reduce el padding para opciones más compactas */
+    height: auto; /* Permite que la altura se ajuste dinámicamente */
   }
 }
