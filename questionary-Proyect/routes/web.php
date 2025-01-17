@@ -26,9 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/modificar', [QuestionaryController::class, 'update']);
     Route::delete('/eliminar-questionary/{id}', [QuestionaryController::class, 'destroy'])->name('questionary.destroy');
     Route::get('/home', [GameController::class, 'index']);
-    Route::get('/play', [GameController::class, 'play']);
+    Route::get('/play', [GameController::class, 'play'])->name('play');
     Route::post('/submit-answer', [GameController::class, 'submitAnswer'])
-    ->middleware('auth')
-    ->name('submit.answer');
+        ->middleware('auth')
+        ->name('submit.answers');
 });
 require __DIR__ . '/auth.php';

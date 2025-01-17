@@ -9,7 +9,6 @@ body {
   background: rgba(39, 23, 110, 0.123);
   border-radius: 10px;
   margin-bottom: 3px;
-  padding-bottom: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -210,8 +209,8 @@ body {
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease, color 0.3s ease;
-  width: 200px;  /* Establece un tamaño fijo para las opciones */
-  height: 65px;  /* Establece una altura consistente */
+  width: 300px; 
+  height: 50px;  
 }
 
 /* Efecto hover en las opciones de respuesta */
@@ -237,6 +236,7 @@ body {
 }
 .style-container-play{
   width: 60% !important;
+  height: 75% !important;
 }
 
 /* Media query para pantallas pequeñas */
@@ -279,4 +279,7 @@ body {
     padding: 8px 15px; /* Reduce el padding para opciones más compactas */
     height: auto; /* Permite que la altura se ajuste dinámicamente */
   }
+}
+.modal-header{
+  background: linear-gradient(to right, #744fda, #6d90a0) !important;
 }
