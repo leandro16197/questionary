@@ -23,15 +23,25 @@
 </head>
 
 <body class="body-style font-sans antialiased">
-@include('game-layouts.nav-game')
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
-        <div class="flex-1 ml-64">
-            <main class="py-4">
-                @yield('content')
-            </main>
+    @include('game-layouts.nav-game')
+    <div class="contenedor-flex">
+    <div class="contenedor__sidebar">
+            @include('game-layouts.sidebar')
+        </div>
+        <div class="contenedor__principal bg-gray-100 dark:bg-gray-900 flex">
+            <div class="flex-1 ml-64">
+                <main class="py-4">
+                    @yield('content')
+                </main>
+            </div>
+
         </div>
     </div>
-    
+
+    <div class="footer-style">
+        @include('game-layouts.footer')
+    </div>
+
     <!-- Scripts comunes -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

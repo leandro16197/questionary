@@ -31,37 +31,37 @@ class GameController extends Controller
         // Validación de las respuestas
         $request->validate([
             'respuestas' => 'required|array',
-            'respuestas.*.id' => 'required|integer|exists:responses,id', 
+            'respuestas.*.id' => 'required|integer|exists:responses,id',
             'respuestas.*.isCorrect' => 'required|boolean'
         ]);
-    
+
         // Obtener las respuestas enviadas
         $respuestas = $request->input('respuestas');
-    
+
         // Obtener el usuario autenticado
         $user = Auth::user();
-    
+
         if (!$user) {
             return response()->json(['message' => 'Usuario no autenticado'], 401);
         }
-    
+
         // Verificar o crear el ranking del usuario
         $ranking = Ranking::firstOrCreate(
             ['users' => $user->id],
             ['points' => 0]
         );
-    
+
         // Inicializar los contadores de respuestas correctas e incorrectas
         $correctas = 0;
         $incorrectas = 0;
-    
+
         foreach ($respuestas as $respuestaData) {
             $respuesta = Response::find($respuestaData['id']);
-    
+
             if (!$respuesta) {
                 continue; // Si la respuesta no existe, se ignora
             }
-    
+
             // Actualizar los puntos del ranking según la respuesta
             if ($respuestaData['isCorrect']) {
                 $correctas++; // Incrementar respuestas correctas
@@ -71,9 +71,9 @@ class GameController extends Controller
                 $ranking->points = max($ranking->points - 1, 0); // Restar 1 punto por respuesta incorrecta, sin dejar que sea negativo
             }
         }
-    
+
         $ranking->save();
-    
+
         // Devolver la respuesta con el conteo de respuestas correctas e incorrectas
         return response()->json([
             'correctas' => $correctas,
@@ -83,27 +83,65 @@ class GameController extends Controller
             'message' => 'Respuestas procesadas correctamente',
         ], 200);
     }
-    
+
 
     public function getQuestion()
     {
         $random = Question::inRandomOrder()->first();
-    
+
         if (!$random) {
             return response()->json(['error' => 'No hay más preguntas disponibles.'], 404);
         }
-    
+
         $respuestas = Response::where('question_id', $random->id)
             ->select('id', 'response', 'is_correct')
             ->get();
-    
+
         // Mezclar aleatoriamente las respuestas
         $respuestas = $respuestas->shuffle();
-    
+
         return response()->json([
             'question' => $random->question,
             'respuestas' => $respuestas
         ]);
     }
+    public function ranking(){
+
+        return view('game-layouts.ranking');
+    }
+    public function rankingDatos(Request $request)
+    {
+        $start = $request->input('start', 0);
+        $length = $request->input('length', 10);
+        $search = $request->input('search.value', '');
+    
+        $query = User::leftJoin('ranking', 'users.id', '=', 'ranking.users')
+            ->select('users.username', 'users.name', 'ranking.points')
+            ->orderBy('ranking.points','desc');
+    
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('users.name', 'like', '%' . $search . '%')
+                  ->orWhere('users.username', 'like', '%' . $search . '%');
+            });
+        }
+    
+        $filteredCount = $query->count();
+    
+        $datos = $query->orderBy('ranking.points', 'ASC')
+            ->skip($start)
+            ->take($length)
+            ->get();
+    
+        $totalRecords = User::count();
+    
+        return response()->json([
+            'draw' => $request->input('draw'),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $filteredCount,
+            'data' => $datos,
+        ]);
+    }
+    
     
 }
