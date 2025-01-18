@@ -25,33 +25,6 @@ body {
   z-index: 1000;
 }
 
-/* Estilo de los enlaces en el sidebar */
-.sidebar .nav-link {
-  margin-bottom: 20px;
-  font-size: 23px !important;
-}
-
-/* Efecto hover en los enlaces del sidebar */
-.sidebar .nav-link:hover {
-  background: linear-gradient(to right, #744fda, #6d90a0);
-  color: #fff;
-  border-radius: 5px;
-  transform: scale(1.05);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Contenedor de las pantallas */
-.contenedor-pantallas-cichas {
-  width: 100%;
-  height: 110px !important;
-}
-
-/* Estilo para el sidebar */
-.style-sidebar-game {
-  height: 100% !important;
-}
-
 /* Estilo de la marca (logo en el navbar) */
 .navbar-brand {
   color: #333;
@@ -77,78 +50,50 @@ body {
   overflow: hidden;
 }
 
-/* Estilo del logo en el cuestionario */
-.questioanry-logo {
-  width: 50% !important;
-  height: 110px;
-}
-
-/* Sidebar con altura ajustada */
-.sidebar {
-  height: calc(100vh - 56px);
-  position: fixed;
-  top: 110px;
-  width: 280px;
-  background-color: var(--bs-dark) !important;
-}
-
-/* Estilos responsivos para pantallas menores de 1000px */
-@media (max-width: 1000px) {
-  /* Ocultar logo en pantallas pequeñas */
-  .div-logo {
-    display: none;
-  }
-
-  /* Estilo para el contenedor de pantallas */
-  .contenedor-pantallas-cichas {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 10px;
-    margin-top: -7% !important;
-  }
-
-  /* Ajustar la visibilidad y alineación del centro */
-  .center-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-
-  /* Estilo para la hamburguesa del menú */
-  .hamburguesa {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  /* Ajuste del tamaño del logo */
-  .questioanry-logo {
-    width: 300px !important;
-    height: auto;
-  }
-
-  /* Ajuste de margen en el navbar-toggler */
-  .navbar-toggler {
-    margin: 0;
-  }
-}
-
-/* Ajuste para el contenedor con pantallas grandes */
-.min-h-screen {
-  margin-left: 300px;
-  margin-right: 20px;
-  flex: 1;
-}
-
 /* Estilo para las imágenes redondeadas */
 .img-fluid {
   border-radius: 50%;
 }
 
-/* Estilos para el cuestionario de /play */
+/* Estilo para las pantallas */
+.contenedor-pantallas-cichas {
+  width: 100%;
+  height: 110px !important;
+}
+
+/* Estilo del sidebar */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh; 
+  width: 280px;
+  background-color: #333;
+  z-index: 1000;
+}
+
+/* Estilo de los enlaces en el sidebar */
+.sidebar .nav-link {
+  margin-bottom: 20px;
+  font-size: 23px !important;
+}
+
+/* Efecto hover en los enlaces del sidebar */
+.sidebar .nav-link:hover {
+  background: linear-gradient(to right, #744fda, #6d90a0);
+  color: #fff;
+  border-radius: 5px;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo del logo en el cuestionario */
+.questioanry-logo {
+  width: 30% !important;
+  height: 110px;
+}
+
+/* Estilo para el cuestionario de /play */
 .question h2 {
   font-size: 24px;
   font-weight: bold;
@@ -161,14 +106,16 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 /* Estilo para las etiquetas de las opciones */
-.question{
+.question {
   padding-top: 10px;
-}
-.form-check-label {
-  font-size: 18px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* Estilo del botón principal */
@@ -182,21 +129,6 @@ body {
 /* Estilo para los inputs de las respuestas */
 .form-check-input {
   margin-right: 10px;
-}
-/* Aseguramos que el contenedor de las respuestas se centre */
-.answers {
-  display: flex;
-  flex-direction: column; /* Coloca las respuestas en una columna */
-  align-items: center; /* Centra las respuestas horizontalmente */
-  justify-content: center; /* Alinea las respuestas verticalmente en el centro */
-  gap: 15px; /* Espaciado entre las respuestas */
-  margin-top: 20px; /* Da un poco de espacio entre el título y las respuestas */
-}
-
-/* Aseguramos que el título también esté centrado */
-.question {
-  text-align: center;
-  margin-bottom: 20px; /* Da espacio debajo del título */
 }
 
 /* Estilo para las opciones de respuesta */
@@ -234,9 +166,11 @@ body {
   background-color: green;
   color: white;
 }
-.style-container-play{
+
+/* Estilos específicos para la pantalla de juego */
+.style-container-play {
   width: 60% !important;
-  height: 75% !important;
+  height: 90% !important;
 }
 
 /* Media query para pantallas pequeñas */
@@ -244,17 +178,16 @@ body {
   .style-container-play {
     width: 90% !important; /* Hace que el contenedor ocupe un 90% del ancho en pantallas pequeñas */
   }
-  .min-h-screen{
-   margin-left: 20px !important;
+  .contenedor__principal {
+    margin-left: 20px !important;
   }
-  .container{
+  .container {
     width: 100% !important;
   }
   /* Ajusta el tamaño del título */
   .question h2 {
     font-size: 20px;
   }
-
 
   .answer-option {
     width: 200px !important; 
@@ -280,6 +213,32 @@ body {
     height: auto; /* Permite que la altura se ajuste dinámicamente */
   }
 }
-.modal-header{
+
+/* Estilos para el modal */
+.modal-header {
   background: linear-gradient(to right, #744fda, #6d90a0) !important;
+}
+
+/* Estilos para el puntaje del usuario */
+.points-user {
+  background: linear-gradient(to right, #744fda, #6d90a0) !important;
+  color: #ffffff; 
+  font-weight: bold;
+}
+
+/* Estilo para el contenedor principal */
+.contenedor__principal {
+  flex: 1;
+  padding-top: 10px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.contenedor__sidebar{
+  margin-top: 0px !important;
+}
+
+.contenedor-flex{
+  display: flex;
+  margin-top: 0px;
 }

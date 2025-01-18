@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/submit-answer', [GameController::class, 'submitAnswer'])
         ->middleware('auth')
         ->name('submit.answers');
+    Route::get('/ranking',[GameController::class,'ranking']);
+    Route::get('/ranking/datos',[GameController::class,'rankingDatos']);
 });
 require __DIR__ . '/auth.php';

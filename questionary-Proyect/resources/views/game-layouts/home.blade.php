@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="titulo-home text-center">¡Bienvenido a Questionary!</h1>
+    <h1 class="titulo-home text-center">¡Bienvenido a Quiz!</h1>
     <p class="text-muted text-center">
         Pon a prueba tus conocimientos con preguntas desafiantes y opciones múltiples. 
         Cada respuesta correcta te llevará un paso más cerca de la victoria. ¿Estás listo para el desafío?
