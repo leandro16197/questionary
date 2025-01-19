@@ -15,7 +15,7 @@
     </div>
 
     <div class="text-center mt-5">
-        <a href="/play" class="btn btn-primary btn-lg" style="background-color: #6d90a0; border: none; font-size: 1.5rem;">
+        <a href="/play" class="btn-play-style btn btn-primary btn-lg" style="background-color: #6d90a0; border: none; font-size: 1.5rem;">
             <i class="fa-solid fa-play me-2"></i> Comenzar a Jugar
         </a>
     </div>

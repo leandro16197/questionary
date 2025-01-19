@@ -1,20 +1,19 @@
-<nav class="navbar navbar-expand-lg  align-items-center">
-  <div class="div-logo align-items-center">
-    <img src="{{ asset('img/logo.png') }}" alt="Logo" class="style-logo me-2">
+<nav class="navbar navbar-expand-lg align-items-center">
+  <div class="div-logo d-none d-lg-flex align-items-center">
+    <img src="{{ asset('img/logo.png') }}" alt="Logo" class="style-logo">
   </div>
 
   <div class="contenedor-pantallas-cichas">
-    <div class="center-title">
+    <div class="center-title d-flex justify-content-center align-items-center">
       <img src="{{ asset('img/Quiz.png') }}" alt="Logo-questionary" class="questioanry-logo me-2">
     </div>
-    <!-- Botón Hamburguesa -->
-    <div class="hamburguesa">
-      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
+    <!-- Botón Hamburguesa visible solo en pantallas pequeñas -->
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
-</nav>
+</nav> 
+
 
 <!-- Sidebar Offcanvas -->
 <div class=" offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">

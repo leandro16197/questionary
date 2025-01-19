@@ -25,7 +25,7 @@
 <body class="body-style font-sans antialiased">
     @include('game-layouts.nav-game')
     <div class="contenedor-flex">
-    <div class="contenedor__sidebar">
+        <div class="contenedor__sidebar">
             @include('game-layouts.sidebar')
         </div>
         <div class="contenedor__principal bg-gray-100 dark:bg-gray-900 flex">
@@ -46,8 +46,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     @stack('scripts')
     @yield('scripts') <!-- Soporte para scripts específicos -->
+    <style>
+  .contenedor-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa de la ventana */
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.5), /* Color negro con 50% de opacidad */
+        rgba(0, 0, 0, 0.5)
+      ),
+      url('{{ asset('img/logo.png') }}'); /* Ruta de la imagen */
+    background-size: cover; /* Ajusta la imagen para que cubra el contenedor */
+    background-position: center; /* Centra la imagen */
+  }
+</style>
 </body>
-
 </html>
+
