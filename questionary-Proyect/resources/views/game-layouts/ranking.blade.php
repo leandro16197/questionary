@@ -13,7 +13,7 @@
 
 
 <div class="">
-    <table class="table-dataTable-ranking table">
+    <table class="table-dataTable-ranking table  ">
         <thead>
             <tr>
                 <th>username</th>
