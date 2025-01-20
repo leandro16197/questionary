@@ -21,6 +21,14 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function edit_jugador(Request $request): View 
+    {
+        dd(Auth::user()->profile_picture);
+        return view('profile.edit_jugador', [
+            'user' => $request->user(),
+        ]);
+    }
+    
     /**
      * Update the user's profile information.
      */
@@ -33,8 +41,9 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+       
+        return back()->with('status', 'profile-updated');
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**

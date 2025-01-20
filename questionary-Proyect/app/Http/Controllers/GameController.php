@@ -47,7 +47,7 @@ class GameController extends Controller
 
         // Verificar o crear el ranking del usuario
         $ranking = Ranking::firstOrCreate(
-            ['users' => $user->id],
+            ['id_user' => $user->id],
             ['points' => 0]
         );
 
@@ -115,7 +115,7 @@ class GameController extends Controller
         $length = $request->input('length', 10);
         $search = $request->input('search.value', '');
     
-        $query = User::leftJoin('ranking', 'users.id', '=', 'ranking.users')
+        $query = User::leftJoin('ranking', 'users.id', '=', 'ranking.id_user')
             ->select('users.username', 'users.name', 'ranking.points')
             ->orderBy('ranking.points','desc');
     

@@ -1,10 +1,17 @@
 <!-- Sidebar para pantallas grandes -->
 <div class="sidebar d-none d-lg-block">
   <div class="style-sidebar-game d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <i class="fa-solid fa-bars me-2" style="font-size: 1.5rem;"></i>
-      <span class="fs-4">Menú</span>
+    @if(Auth::user()->profile_picture)
+    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="/profile/jugador" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
+      <span>{{ Auth::user()->username }}</span>
     </a>
+    @else
+    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src="{{ asset('img/sin-perfil.jpg') }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
+    <span>{{ Auth::user()->username }}</span>
+    </a>
+    @endif
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -32,10 +39,20 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="/profile/jugador" class="nav-link text-white">
           <i class="fa-solid fa-user me-2"></i> Perfil
         </a>
       </li>
+      <li class="nav-item">
+        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+          @csrf
+          <a href="{{ route('logout') }}" class="close_sesion nav-link text-white px-3 py-2 rounded hover-bg-light"
+            onclick="event.preventDefault(); this.closest('form').submit();">
+            <i class="fa-solid fa-sign-out-alt me-2"></i> Cerrar sesión
+          </a>
+        </form>
+      </li>
+
     </ul>
   </div>
 </div>

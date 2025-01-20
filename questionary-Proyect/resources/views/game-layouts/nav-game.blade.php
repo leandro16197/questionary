@@ -12,48 +12,62 @@
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
-</nav> 
+</nav>
 
 
 <!-- Sidebar Offcanvas -->
-<div class=" offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Sidebar</h5>
+    @if(Auth::user()->profile_picture)
+    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
+      <span>{{ Auth::user()->username }}</span>
+    </a>
+    @else
+    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="{{ asset('img/sin-perfil.jpg') }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
+      <span>{{ Auth::user()->username }}</span>
+    </a>
+    @endif
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#home"></use>
-          </svg>
-          inicio
+        <a href="/home" class="nav-link text-white" aria-current="page">
+          <i class="fa-solid fa-house me-2"></i> Inicio
         </a>
       </li>
+      @if(Auth::user() && Auth::user()->rol == 1)
       <li>
-        @if(Auth::user() && Auth::user()->rol==1)
-      <li>
-        <a href="#" class="nav-link text-white">
+        <a href="/addQuestion" class="nav-link text-white">
           <i class="fa-solid fa-user-cog me-2"></i> Admin
         </a>
       </li>
       @endif
-      </li>
       <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="/rankin"></use>
-          </svg>
-          Ranking
+        <a href="/play" class="nav-link text-white">
+          <i class="fa-solid fa-play me-2"></i> Jugar
         </a>
       </li>
       <li>
-        <div class="text-center mt-5">
-          <a href="/play" class="btn btn-primary btn-lg">
-            <i class="fa-solid fa-play me-2"></i> Jugar ahora
+        <a href="/ranking" class="nav-link text-white">
+          <i class="fa-solid fa-ranking-star me-2"></i> Ranking
+        </a>
+      </li>
+      <li>
+        <a href="/profile/jugador" class="nav-link text-white">
+          <i class="fa-solid fa-user me-2"></i> Perfil
+        </a>
+      </li>
+      <li class="nav-item">
+        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+          @csrf
+          <a href="{{ route('logout') }}" class="close_sesion nav-link text-white px-3 py-2 rounded hover-bg-light"
+            onclick="event.preventDefault(); this.closest('form').submit();">
+            <i class="fa-solid fa-sign-out-alt me-2"></i> Cerrar sesión
           </a>
-        </div>
+        </form>
       </li>
     </ul>
   </div>

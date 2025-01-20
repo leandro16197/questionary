@@ -29,12 +29,16 @@ Route::middleware('auth')->group(function () {
         Route::delete('/eliminar-questionary/{id}', [QuestionaryController::class, 'destroy'])->name('questionary.destroy');
     });
 
-    // Rutas accesibles para todos los usuarios autenticados
+
     Route::get('/home', [GameController::class, 'index']);
     Route::get('/play', [GameController::class, 'play'])->name('play');
     Route::post('/submit-answer', [GameController::class, 'submitAnswer'])->name('submit.answers');
     Route::get('/ranking', [GameController::class, 'ranking']);
     Route::get('/ranking/datos', [GameController::class, 'rankingDatos']);
+    Route::get('/profile/jugador',[ProfileController::class,'edit_jugador'])->name('profile.edit');
+    Route::patch('/profile/jugador', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/jugador', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 require __DIR__ . '/auth.php';

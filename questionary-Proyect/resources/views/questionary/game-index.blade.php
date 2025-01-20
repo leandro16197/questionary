@@ -49,20 +49,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     @stack('scripts')
-    @yield('scripts') <!-- Soporte para scripts específicos -->
+    @yield('scripts') 
     <style>
   .contenedor-flex {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Altura completa de la ventana */
+    height: 100vh; 
     background: linear-gradient(
-        rgba(0, 0, 0, 0.5), /* Color negro con 50% de opacidad */
+        rgba(0, 0, 0, 0.5), 
         rgba(0, 0, 0, 0.5)
       ),
-      url('{{ asset('img/logo.png') }}'); /* Ruta de la imagen */
-    background-size: cover; /* Ajusta la imagen para que cubra el contenedor */
-    background-position: center; /* Centra la imagen */
+      url('{{ asset('img/logo.png') }}'); 
+    background-size: cover; 
+    background-position: center; 
   }
 </style>
 </body>

@@ -185,6 +185,7 @@ body {
   }
   .contenedor__principal {
     margin-left: 20px !important;
+    height: 100% !important;
   }
   .container {
     width: 100% !important;
@@ -213,6 +214,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
   }
 
   .div-logo {
@@ -223,13 +225,13 @@ body {
 /* Media query para pantallas muy pequeñas (teléfonos muy pequeños) */
 @media (max-width: 480px) {
   .question h2 {
-    font-size: 18px; /* Reduce aún más el tamaño del título */
+    font-size: 18px; 
   }
 
   .answer-option {
-    font-size: 14px; /* Disminuye el tamaño de la fuente de las opciones */
-    padding: 8px 15px; /* Reduce el padding para opciones más compactas */
-    height: auto; /* Permite que la altura se ajuste dinámicamente */
+    font-size: 14px; 
+    padding: 8px 15px; 
+    height: auto; 
   }
 }
 
@@ -251,7 +253,7 @@ body {
   padding-top: 10px;
   margin-left: 15px;
   margin-right: 15px;
-  height: 100vh;
+  height: 650px;
   overflow-y: auto;
 }
 
@@ -266,7 +268,7 @@ body {
 .footer-style {
   background: linear-gradient(to right, #4f3596, #37535f);
   text-align: center;
-  padding: 20px 0; /* Añade un poco de espacio alrededor del contenido */
+
 }
 
 .footer {
@@ -318,4 +320,69 @@ body {
 .btn-play-style{
   width: 300px;
   margin-bottom: 3%;
+}
+
+/*modificar Perfil jugador*/
+
+.div-actualizacion-perfil {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.form-questionary {
+  color: aliceblue !important;
+  margin-bottom: 2% !important;
+  transition:none !important;
+}
+.style-danger{
+  margin-bottom: 2% !important;
+  border: none !important;
+}
+.modificar-contrasena {
+  display: flex; /* Usamos Flexbox */
+  justify-content: space-between; /* Espaciado entre los elementos */
+  gap: 20px; /* Espacio entre los elementos */
+  flex-wrap: wrap; /* Permite que se acomoden en una nueva línea si el espacio es reducido */
+}
+
+.form-questionary {
+  flex: 1 1 45%; /* Cada bloque toma el 45% del ancho, con un 1 de flexibilidad */
+  box-sizing: border-box;
+  background-color: #5c478371;
+  border-radius: 10px ;
+  padding: 5px;
+}
+
+.centered-content {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .modificar-contrasena {
+      flex-direction: column; /* Los bloques se apilarán verticalmente */
+  }
+
+  .form-questionary {
+      flex: 1 1 100%; /* Cada bloque tomará el 100% del ancho */
+  }
+}
+#sidebarOffcanvas .nav-link:hover {
+  background: linear-gradient(to right, #4f3596, #37535f);
+  color: white;
+  transition: background 0.3s ease, color 0.3s ease;
 }
