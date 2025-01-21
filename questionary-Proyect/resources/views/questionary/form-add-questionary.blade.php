@@ -67,14 +67,20 @@
         <div class="addGenero order-1 order-md-2 mt-0"> <!-- Cambié mt-4 a mt-0 para evitar el desplazamiento -->
             <div class="generos">
                 <h1 class="addPreguntas">Agregar Género</h1>
-                <form class="form-questionary questionary_genero" id="addGeneroForm">
+                <form class="form-questionary questionary_genero" id="addGeneroForm" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="addGenero-nombre" for="name">Nombre del Género:</label>
                         <input type="text" id="name" name="name" class="form-control" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label class="addGenero-imagen addGenero-nombre" for="image">Imagen del Género:</label>
+                        <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Agregar Género</button>
                 </form>
+
             </div>
             <div class="table-generos-style">
                 <table class="table-generos">
@@ -101,7 +107,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                @csrf
+                    @csrf
                     <input type="hidden" id="genero-id">
                     <div class="form-group">
                         <label for="genero-name">Nombre del Género</label>
@@ -143,44 +149,40 @@
 <script src="{{ asset('js/edit_update.js') }}"></script>
 @endpush
 <script>
-    document.getElementById('addGeneroForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+    document.getElementById('addGeneroForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-        const formData = new FormData(this);
-        const name = formData.get('name');
+    const formData = new FormData(this);
 
-        fetch('api/generos', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
+    fetch('api/generos', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json', // Aceptamos JSON como respuesta
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Solo si usas Laravel y necesitas CSRF
+        },
+        body: formData, // Pasamos el FormData directamente
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
 
-                if (data.status == 201) {
+        if (data.status == 201) {
+            if (data.genero && data.genero.id && data.genero.name) {
+                const select = document.getElementById('genero_id');
+                const newOption = document.createElement('option');
+                newOption.value = data.genero.id;
+                newOption.textContent = data.genero.name;
+                select.appendChild(newOption);
+            } else {
+                console.log('Error: Los datos del género no están completos', data);
+            }
+        } else {
+            console.log('Error al agregar género:', data);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
 
-
-                    if (data.genero && data.genero.id && data.genero.name) {
-                        const select = document.getElementById('genero_id');
-                        const newOption = document.createElement('option');
-                        newOption.value = data.genero.id;
-                        newOption.textContent = data.genero.name;
-                        select.appendChild(newOption);
-                    } else {
-                        console.log('Error: Los datos del género no están completos', data);
-                    }
-                } else {
-                    console.log('Error al agregar género');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    });
 
 
     document.addEventListener('DOMContentLoaded', function() {

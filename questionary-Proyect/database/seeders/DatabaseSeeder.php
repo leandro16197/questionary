@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(generosSeeder::class);//carga generos
         $this->call(Questions::class);//carga preguntas
         $this->call(Responses::class);//carga respuestas
-
+        $this->call(ImgGeneros::class);//agrega imagenes a los generos
+        $this->call(LifePurchaseSeeder::class);//agrega los valores a la tabla de vidas
     }
 }

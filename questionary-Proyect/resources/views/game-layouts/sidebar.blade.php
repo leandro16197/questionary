@@ -2,14 +2,28 @@
 <div class="sidebar d-none d-lg-block">
   <div class="style-sidebar-game d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
     @if(Auth::user()->profile_picture)
-    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="/profile/jugador" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="/profile/jugador" role="button">
       <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
       <span>{{ Auth::user()->username }}</span>
     </a>
+    @if(isset($vidas) && $vidas->vidas !== null)
+    <div class="mt-3">
+      <span class="badge bg-success">
+        <i class="fa-solid fa-heart me-2"></i> Vidas: {{ $vidas->vidas }}
+      </span>
+    </div>
+    @endif
     @else
-    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <img src="{{ asset('img/sin-perfil.jpg') }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
-    <span>{{ Auth::user()->username }}</span>
+    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="#" role="button">
+      <img src="{{ asset('img/sin-perfil.jpg') }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
+      <span>{{ Auth::user()->username }}</span>
+      @if(isset($vidas) && $vidas->vidas !== null)
+      <div class="mt-3">
+        <span class="badge bg-success">
+          <i class="fa-solid fa-heart me-2"></i> Vidas: {{ $vidas->vidas }}
+        </span>
+      </div>
+      @endif
     </a>
     @endif
     <hr>

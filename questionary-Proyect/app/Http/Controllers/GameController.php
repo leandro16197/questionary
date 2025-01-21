@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\User;
 use App\Models\Ranking;
+use App\Models\vidaModel;
 use App\Models\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,45 +14,52 @@ class GameController extends Controller
 {
     public function index()
     {
-        return view('game-layouts.home');
+        $user = Auth::user();
+        $vidas = vidaModel::where('user_id', $user->id)->first();
+        return view('game-layouts.home', ['user' => $user, 'vidas' => $vidas]);
     }
 
     public function play()
     {
-        $random = Question::inRandomOrder()->first();
-        $respuestas = Response::where('question_id', $random->id)->select('id', 'response', 'question_id', 'is_correct')->get();
-
+        $random = Question::inRandomOrder()
+        ->leftjoin('generos','generos.id','=','questions.genero_id')
+        ->first();
+        $respuestas = Response::where('question_id', $random->id)
+        ->select('id', 'response', 'question_id', 'is_correct')->get();
+        $user = Auth::user();
+        $vidas = vidaModel::where('user_id', $user->id)->first();
         return view('game-layouts.play', [
             'question' => $random,
-            'respuestas' => $respuestas
+            'respuestas' => $respuestas,
+            'vidas' => $vidas
         ]);
     }
     public function submitAnswer(Request $request)
     {
-        // Validación de las respuestas
+ 
         $request->validate([
             'respuestas' => 'required|array',
             'respuestas.*.id' => 'required|integer|exists:responses,id',
             'respuestas.*.isCorrect' => 'required|boolean'
         ]);
 
-        // Obtener las respuestas enviadas
+ 
         $respuestas = $request->input('respuestas');
 
-        // Obtener el usuario autenticado
+
         $user = Auth::user();
 
         if (!$user) {
             return response()->json(['message' => 'Usuario no autenticado'], 401);
         }
 
-        // Verificar o crear el ranking del usuario
+       
         $ranking = Ranking::firstOrCreate(
             ['id_user' => $user->id],
             ['points' => 0]
         );
 
-        // Inicializar los contadores de respuestas correctas e incorrectas
+       
         $correctas = 0;
         $incorrectas = 0;
 
@@ -59,22 +67,22 @@ class GameController extends Controller
             $respuesta = Response::find($respuestaData['id']);
 
             if (!$respuesta) {
-                continue; // Si la respuesta no existe, se ignora
+                continue; 
             }
 
-            // Actualizar los puntos del ranking según la respuesta
+   
             if ($respuestaData['isCorrect']) {
-                $correctas++; // Incrementar respuestas correctas
-                $ranking->points += 1; // Sumar 1 punto por respuesta correcta
+                $correctas++; 
+                $ranking->points += 1; 
             } else {
-                $incorrectas++; // Incrementar respuestas incorrectas
-                $ranking->points = max($ranking->points - 1, 0); // Restar 1 punto por respuesta incorrecta, sin dejar que sea negativo
+                $incorrectas++; 
+                $ranking->points = max($ranking->points - 1, 0); 
             }
         }
 
         $ranking->save();
 
-        // Devolver la respuesta con el conteo de respuestas correctas e incorrectas
+
         return response()->json([
             'correctas' => $correctas,
             'incorrectas' => $incorrectas,
@@ -106,8 +114,10 @@ class GameController extends Controller
         ]);
     }
     public function ranking(){
+        $user = Auth::user();
+        $vidas = vidaModel::where('user_id', $user->id)->first();
+        return view('game-layouts.ranking', ['vidas' => $vidas]);
 
-        return view('game-layouts.ranking');
     }
     public function rankingDatos(Request $request)
     {

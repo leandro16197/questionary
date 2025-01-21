@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\vidaModel;
 
 class ProfileController extends Controller
 {
@@ -23,9 +24,11 @@ class ProfileController extends Controller
 
     public function edit_jugador(Request $request): View 
     {
-        dd(Auth::user()->profile_picture);
+        $user = Auth::user();
+        $vidas = vidaModel::where('user_id', $user->id)->first();
         return view('profile.edit_jugador', [
             'user' => $request->user(),
+            'vidas' => $vidas
         ]);
     }
     

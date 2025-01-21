@@ -65,12 +65,12 @@ body {
 
 /* Estilo del sidebar */
 .sidebar {
+  padding-top: 30px;
   position: sticky;
-  top: 0;
-  height: 100vh;
+  height: 111%;
   width: 280px;
   background-color: #212529;
-  z-index: 1000;
+
 }
 
 /* Estilo de los enlaces en el sidebar */
@@ -171,8 +171,7 @@ body {
 
 /* Estilos específicos para la pantalla de juego */
 .style-container-play {
-  width: 60% !important;
-  height: 90% !important;
+  width: 70% !important;
 }
 
 /* Media query para pantallas pequeñas */
@@ -250,25 +249,32 @@ body {
 /* Estilo para el contenedor principal */
 .contenedor__principal {
   flex: 1;
-  padding-top: 10px;
+  margin-top: 4%;
+  margin-bottom: 5%;
   margin-left: 15px;
   margin-right: 15px;
-  height: 650px;
-  overflow-y: auto;
+  height: 100%;
+
 }
 
 .contenedor__sidebar {
   margin-top: 0px !important;
+  height: 110%;
 }
 
 .contenedor-flex {
   display: flex;
   margin-top: 0px;
+  height: 100%;
 }
 .footer-style {
   background: linear-gradient(to right, #4f3596, #37535f);
   text-align: center;
-
+  padding-top:10px ;
+  height: auto;
+}
+.lista_contactos{
+  margin-top: 5%;
 }
 
 .footer {
@@ -376,7 +382,9 @@ body {
   .modificar-contrasena {
       flex-direction: column; /* Los bloques se apilarán verticalmente */
   }
-
+  .contenedor__principal{
+    margin-bottom: 10%;
+  }
   .form-questionary {
       flex: 1 1 100%; /* Cada bloque tomará el 100% del ancho */
   }
@@ -385,4 +393,21 @@ body {
   background: linear-gradient(to right, #4f3596, #37535f);
   color: white;
   transition: background 0.3s ease, color 0.3s ease;
+}
+.img-question-play{
+  width: 25% ;
+  height: 20%;
+}
+.style-container-play {
+  padding-bottom: 20px;
+  margin-bottom:8% !important;
+}
+.style-container-play {
+  min-height: calc(100vh - 150px) !important;
+}
+.footer-style {
+  position: relative !important; 
+  bottom: 0 !important;
+  margin-top: 30px;
+  width: 100% !important;
 }

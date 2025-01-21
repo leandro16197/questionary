@@ -9,6 +9,7 @@
 
         <!-- Pregunta -->
         <div class="question text-center mb-4">
+        <img src="{{ asset($question->image) }}" class="img-question-play" alt="">
             <h2>{{ $question->question }}</h2>
         </div>
 

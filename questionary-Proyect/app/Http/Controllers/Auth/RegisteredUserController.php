@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\vidaModel;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,6 +49,10 @@ class RegisteredUserController extends Controller
             'username'=>$request->username,
             'rol'=>'2',
             'profile_picture' => $imagePath,
+        ]);
+        $vidas=vidaModel::create([
+            'user_id'=>$user->id,
+            'vidas'=>5
         ]);
         event(new Registered($user));
 

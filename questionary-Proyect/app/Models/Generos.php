@@ -13,6 +13,7 @@ class Generos extends Model
 
     protected $fillable=[
         'id',
-        'name'
+        'name',
+        'image'
     ];
 }
