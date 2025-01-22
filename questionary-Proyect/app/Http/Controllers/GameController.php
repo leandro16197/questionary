@@ -168,6 +168,23 @@ class GameController extends Controller
             'data' => $datos,
         ]);
     }
-    
+    public function restartGame(Request $request)
+{
+    $question = Question::inRandomOrder()->first();
+    $respuestas = $question->answers; 
+
+    return response()->json([
+        'success' => true,
+        'question' => $question->text,
+        'respuestas' => $respuestas->map(function ($respuesta) {
+            return [
+                'id' => $respuesta->id,
+                'response' => $respuesta->text,
+                'is_correct' => $respuesta->is_correct,
+            ];
+        }),
+    ]);
+}
+
     
 }

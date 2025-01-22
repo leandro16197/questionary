@@ -1,8 +1,10 @@
 <?php
+
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\generosController;
 use App\Http\Controllers\QuestionaryController;
+use App\Http\Controllers\MercadoPagoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -35,9 +37,27 @@ Route::middleware('auth')->group(function () {
     Route::post('/submit-answer', [GameController::class, 'submitAnswer'])->name('submit.answers');
     Route::get('/ranking', [GameController::class, 'ranking']);
     Route::get('/ranking/datos', [GameController::class, 'rankingDatos']);
-    Route::get('/profile/jugador',[ProfileController::class,'edit_jugador'])->name('profile.edit');
+    Route::get('/profile/jugador', [ProfileController::class, 'edit_jugador'])->name('profile.edit');
     Route::patch('/profile/jugador', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/jugador', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/restart-game', [GameController::class, 'restartGame'])->name('restart.game');
+
+
+    Route::post('/create-preference', [MercadoPagoController::class, 'createPreference']);
+    
+    Route::get('/success', function () {
+        return '¡Pago exitoso!';
+    })->name('success');
+    
+    Route::get('/failure', function () {
+        return 'El pago falló.';
+    })->name('failure');
+    
+    Route::get('/pending', function () {
+        return 'El pago está pendiente.';
+    })->name('pending');
+
+    Route::post('/mercadopago/webhook', [MercadoPagoController::class, 'webhook']);
 
 });
 

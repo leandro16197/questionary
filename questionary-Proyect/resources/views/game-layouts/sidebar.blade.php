@@ -46,6 +46,9 @@
         </a>
       </li>
       <li>
+      <div id="wallet_container"></div>
+      </li>
+      <li>
         @if(Auth::user() && Auth::user()->rol==1)
       <li>
         <a href="/addQuestion" class="nav-link text-white">
@@ -82,3 +85,36 @@
     </ul>
   </div>
 </div>
+<script>
+    const mp = new MercadoPago("{{ env('MERCADO_PAGO_PUBLIC_KEY') }}");
+    fetch('/create-preference', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.preferenceId) {
+            mp.bricks().create("wallet", "wallet_container", {
+                initialization: {
+                    preferenceId: data.preferenceId,
+                    redirectMode: 'self'
+                },
+                customization: {
+                    texts: {
+                        action: "pay",
+                        valueProp: 'security_safety',
+                    },
+                },
+            });
+        } else {
+            console.error("No se pudo obtener el preferenceId");
+        }
+    })
+    .catch(error => {
+        console.error("Error al obtener el preferenceId:", error);
+    });
+</script>

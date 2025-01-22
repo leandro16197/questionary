@@ -51,11 +51,11 @@
             <div class="modal-body text-center" id="modal-results">
                 <!-- Los resultados se insertarán aquí -->
                 <p class="fs-4">¡Excelente trabajo!</p>
-                <p class="fs-5">Respuestas correctas: <span id="correctas-count">0</span></p>
+                <p class="fs-5">Respuestas correctas: <span id="correctas-count">0 </span></p>
                 <p class="fs-5">Respuestas incorrectas: <span id="incorrectas-count">0</span></p>
             </div>
             <div class="modal-footer d-flex justify-content-between">
-                <button type="button" class="btn btn-outline-success" id="replayBtn">Volver a jugar</button>
+                <button type="button" class="btn btn-outline-success" id="restartGameBtn replayBtn">Volver a jugar</button>
                 <button type="button" class="btn btn-outline-info" id="rankingBtn">Ir al Ranking</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
@@ -81,6 +81,9 @@
             </div>
             <div class="boton-ranking">
             <a href="/ranking" class="btn btn-primary">Ir al Ranking</a>
+            </div>
+            <div class="boton-ranking">
+            <a href="/ranking" class="btn btn-primary">Comprar Vidas</a>
             </div>
         </div>
       </div>
@@ -129,28 +132,25 @@ document.addEventListener("DOMContentLoaded", function() {
     function assignAnswerEvents() {
         answerLabels.forEach(label => {
             label.addEventListener('click', function() {
-                if (vidas <= 0) return; // Si no hay vidas, no se permite seleccionar
+                if (vidas <= 0) return;
 
                 const selectedAnswerId = label.getAttribute('data-id');
                 const isCorrect = label.getAttribute('data-correct') === '1';
 
-                // Restablecer colores antes de aplicar nuevos estilos
                 answerLabels.forEach(l => {
                     l.style.backgroundColor = '';
                     l.style.color = '';
                 });
 
-                // Aplicar estilos según la respuesta seleccionada
                 if (!isCorrect) {
                     label.style.backgroundColor = 'red';
                     label.style.color = 'white';
-                    vidas--; // Disminuir las vidas si la respuesta es incorrecta
                 } else {
                     label.style.backgroundColor = 'green';
                     label.style.color = 'white';
                 }
 
-                // Marcar la respuesta correcta si la seleccionada es incorrecta
+
                 if (!isCorrect) {
                     answerLabels.forEach(l => {
                         if (l.getAttribute('data-correct') === '1') {
@@ -160,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
                 }
 
-                // Bloquear la selección de otras opciones
                 answerLabels.forEach(l => {
                     l.style.pointerEvents = 'none';
                 });
@@ -170,42 +169,35 @@ document.addEventListener("DOMContentLoaded", function() {
                     input.disabled = true;
                 });
 
-                // Almacenar la respuesta seleccionada
+
                 respuestas.push({
                     id: selectedAnswerId,
                     isCorrect: isCorrect
                 });
                 respuestaCount++;
-
-                // Verificar si ya se respondieron 5 preguntas
                 if (respuestaCount >= 5) {
                     console.log("Enviando respuestas...", respuestas);
                     sendAllAnswers(respuestas);
                 } else {
                     console.log("Respuestas pendientes:", respuestaCount);
-                    // Esperar 3 segundos y obtener otra pregunta aleatoria
                     setTimeout(() => {
                         fetchNewQuestion();
                     }, 1000);
                 }
-
-                // Verificar si no quedan vidas
-                if (vidas <= 0) {
+                if (vidas <= 0 && respuestaCount==5) {
                     showNoLivesModal();
                 }
             });
         });
     }
 
-    // Función para mostrar el modal cuando no haya vidas
     function showNoLivesModal() {
         const noLivesModal = new bootstrap.Modal(document.getElementById('noLivesModal'), {
-            keyboard: false // Desactivar el cierre al presionar ESC
+            keyboard: false 
         });
         noLivesModal.show();
     }
 
-    // Función para enviar todas las respuestas al servidor
     function sendAllAnswers(respuestas) {
         fetch("{{ route('submit.answers') }}", {
                 method: "POST",
@@ -305,6 +297,58 @@ document.addEventListener("DOMContentLoaded", function() {
     // Manejar el botón "Ir al Ranking"
     document.getElementById('rankingBtn').addEventListener('click', function() {
         window.location.href = '/ranking';
+    });
+    document.getElementById('restartGameBtn').addEventListener('click', function () {
+        // Realizar solicitud AJAX para reiniciar el juego
+        fetch("{{ route('restart.game') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                // Restablecer las vidas
+                vidas = data.vidas;
+
+                // Actualizar la interfaz
+                const questionContainer = document.getElementById('question-container');
+                const questionElement = questionContainer.querySelector('.question h2');
+                const answersContainer = questionContainer.querySelector('.answers');
+                answersContainer.innerHTML = '';
+
+                // Agregar la nueva pregunta y respuestas
+                questionElement.textContent = data.question;
+                data.respuestas.forEach(respuesta => {
+                    const answerLabel = document.createElement('label');
+                    answerLabel.classList.add('form-check-label', 'answer-option');
+                    answerLabel.setAttribute('data-id', respuesta.id);
+                    answerLabel.setAttribute('data-correct', respuesta.is_correct ? '1' : '0');
+                    answerLabel.textContent = respuesta.response;
+                    answersContainer.appendChild(answerLabel);
+                });
+
+                // Reasignar eventos
+                answerLabels = document.querySelectorAll('.answer-option');
+                assignAnswerEvents();
+
+                // Ocultar el modal
+                const noLivesModal = bootstrap.Modal.getInstance(document.getElementById('noLivesModal'));
+                noLivesModal.hide();
+            } else {
+                alert('No se pudo reiniciar el juego. Intenta nuevamente.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al reiniciar el juego:', error);
+        });
     });
 });
 

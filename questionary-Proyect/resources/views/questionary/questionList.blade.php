@@ -92,7 +92,11 @@
         </div>
     </div>
 </div>
-
+<style>
+    .py-4{
+        width: 100% !important;
+    }
+</style>
 @endsection
 @push('scripts')
 <!-- jQuery -->
