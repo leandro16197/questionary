@@ -12,6 +12,12 @@
         <i class="fa-solid fa-heart me-2"></i> Vidas: {{ $vidas->vidas }}
       </span>
     </div>
+    @else
+    <div class="mt-3">
+      <span class="badge bg-success">
+        <i class="fa-solid fa-heart me-2"></i> Vidas: 5
+      </span>
+    </div>
     @endif
     @else
     <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="#" role="button">
@@ -20,7 +26,13 @@
       @if(isset($vidas) && $vidas->vidas !== null)
       <div class="mt-3">
         <span class="badge bg-success">
-          <i class="fa-solid fa-heart me-2"></i> Vidas: {{ $vidas->vidas }}
+          <i class="fa-solid fa-heart me-2"></i> Vsidas: {{ $vidas->vidas }}
+        </span>
+      </div>
+      @else
+      <div class="mt-3">
+        <span class="badge bg-success">
+          <i class="fa-solid fa-heart me-2"></i> Vidas: 5
         </span>
       </div>
       @endif

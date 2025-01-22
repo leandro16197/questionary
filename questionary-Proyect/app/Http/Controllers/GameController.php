@@ -79,7 +79,23 @@ class GameController extends Controller
                 $ranking->points = max($ranking->points - 1, 0); 
             }
         }
+        $vidas = vidaModel::where('user_id', '=', $user->id)->first();
 
+        if (!$vidas) {
+
+            $vidas = vidaModel::firstOrCreate(
+                ['user_id' => $user->id],
+                ['vidas' => 5]
+            );
+        }
+        
+
+        $vidaActual = $vidas->vidas;
+
+        $vidas->vidas = $vidaActual - 1;
+
+        $vidas->save();
+        
         $ranking->save();
 
 
