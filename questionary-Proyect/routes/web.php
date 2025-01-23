@@ -4,6 +4,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\generosController;
 use App\Http\Controllers\QuestionaryController;
+use App\Http\Controllers\LifeController;
 use App\Http\Controllers\MercadoPagoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -58,7 +59,8 @@ Route::middleware('auth')->group(function () {
     })->name('pending');
 
     Route::post('/mercadopago/webhook', [MercadoPagoController::class, 'webhook']);
-
+    
+    Route::get('/market',[LifeController::class,'getLife'])->name('vidas.get');
 });
 
 require __DIR__ . '/auth.php';

@@ -67,7 +67,7 @@ body {
 .sidebar {
   padding-top: 30px;
   position: sticky;
-  height: 111%;
+  height: 112%;
   width: 280px;
   background-color: #212529;
 
@@ -87,6 +87,7 @@ body {
   transform: scale(1.05);
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 250px !important;
 }
 
 /* Estilo del logo en el cuestionario */
@@ -259,18 +260,19 @@ body {
 
 .contenedor__sidebar {
   margin-top: 0px !important;
-  height: 110%;
+  height: 100%;
 }
 
 .contenedor-flex {
   display: flex;
   margin-top: 0px;
   height: 100%;
+  margin-bottom: 11% !important;
 }
 .footer-style {
   background: linear-gradient(to right, #4f3596, #37535f);
   text-align: center;
-  padding-top:10px ;
+  padding-top:5px ;
   height: auto;
 }
 .lista_contactos{
@@ -408,7 +410,7 @@ body {
 .footer-style {
   position: relative !important; 
   bottom: 0 !important;
-  margin-top: 30px;
+  margin-top: 15px !important;
   width: 100% !important;
 }
 .modal-dialog {
@@ -460,4 +462,62 @@ body {
  .botones-modal-vida{
   margin-right: 20% !important;
  }
+}
+.container {
+  margin-top: 10%;
+}
+
+.style-container-market {
+  border-radius: 10px;
+  width: 60% !important;
+  padding: 20px;
+}
+
+.alert-info {
+  background-color: #ffffff;
+  background: linear-gradient(to right, #4f3596, #37535f);
+  color: #d1cdcd !important;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.card {
+  background-color: #97949431 !important;
+  border-radius: 15px;
+}
+
+.card-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  color: #e2e0e0 !important;
+}
+
+.form-check-label {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.btn-success {
+  background-color: #27ae60;
+  border: none;
+  transition: all 0.3s;
+}
+
+.btn-success:hover {
+  background-color: #2ecc71;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .alert-info {
+      font-size: 0.9rem;
+  }
+
+  .card-title {
+      font-size: 1.2rem;
+  }
+
+  .form-check-label {
+      font-size: 0.9rem;
+  }
 }

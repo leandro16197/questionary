@@ -24,6 +24,7 @@
 </head>
 
 <body class="body-style font-sans antialiased">
+@yield('scripts') 
     @include('game-layouts.nav-game')
     <div class="contenedor-flex">
         <div class="contenedor__sidebar">
@@ -44,14 +45,14 @@
     </div>
 
     <!-- Scripts comunes -->
-  
+     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     @stack('scripts')
-    @yield('scripts') 
     <style>
   .contenedor-flex {
     display: flex;

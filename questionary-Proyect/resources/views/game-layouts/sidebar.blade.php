@@ -8,9 +8,9 @@
     </a>
     @if(isset($vidas) && $vidas->vidas !== null)
     <div class="mt-3">
-      <span class="badge bg-success">
+      <button class="badge bg-success" type="button" id="buton-vidas">
         <i class="fa-solid fa-heart me-2"></i> Vidas: {{ $vidas->vidas }}
-      </span>
+      </button>
     </div>
     @else
     <div class="mt-3">
@@ -20,14 +20,14 @@
     </div>
     @endif
     @else
-    <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" href="#" role="button">
+    <div class="nav-link text-white px-3 py-2 rounded hover-bg-light">
       <img src="{{ asset('img/sin-perfil.jpg') }}" alt="Profile Picture" class="rounded-circle" width="50" height="50">
       <span>{{ Auth::user()->username }}</span>
       @if(isset($vidas) && $vidas->vidas !== null)
       <div class="mt-3">
-        <span class="badge bg-success">
-          <i class="fa-solid fa-heart me-2"></i> Vsidas: {{ $vidas->vidas }}
-        </span>
+        <button class="badge bg-success" type="button" id="button-vidas">
+          <i class="fa-solid fa-heart me-2"></i> Vidas: {{ $vidas->vidas }}
+        </button>
       </div>
       @else
       <div class="mt-3">
@@ -36,7 +36,8 @@
         </span>
       </div>
       @endif
-    </a>
+    </div>
+
     @endif
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -44,9 +45,6 @@
         <a href="/home" class="nav-link text-white" aria-current="page">
           <i class="fa-solid fa-house me-2"></i> Inicio
         </a>
-      </li>
-      <li>
-      <div id="wallet_container"></div>
       </li>
       <li>
         @if(Auth::user() && Auth::user()->rol==1)
@@ -60,6 +58,11 @@
       <li>
         <a href="/ranking" class="nav-link text-white">
           <i class="fa-solid fa-chart-line me-2"></i> Ranking
+        </a>
+      </li>
+      <li>
+        <a href="/market" class="nav-link text-white" aria-label="Ir al mercado">
+          <i class="fa-solid fa-cart-shopping me-2"></i> Comprar
         </a>
       </li>
       <li>
@@ -85,36 +88,3 @@
     </ul>
   </div>
 </div>
-<script>
-    const mp = new MercadoPago("{{ env('MERCADO_PAGO_PUBLIC_KEY') }}");
-    fetch('/create-preference', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({})
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.preferenceId) {
-            mp.bricks().create("wallet", "wallet_container", {
-                initialization: {
-                    preferenceId: data.preferenceId,
-                    redirectMode: 'self'
-                },
-                customization: {
-                    texts: {
-                        action: "pay",
-                        valueProp: 'security_safety',
-                    },
-                },
-            });
-        } else {
-            console.error("No se pudo obtener el preferenceId");
-        }
-    })
-    .catch(error => {
-        console.error("Error al obtener el preferenceId:", error);
-    });
-</script>
