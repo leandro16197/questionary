@@ -1,4 +1,3 @@
-
 @extends('questionary.game-index')
 
 @section('title', 'Market')
@@ -14,34 +13,34 @@
         <div class="card-body">
             <h5 class="card-title mb-4">Selecciona tu paquete de vidas</h5>
             @foreach ($data as $vida)
-                <div class="form-check mb-3">
-                    <input 
-                        class="form-check-input vida-radio" 
-                        type="radio" 
-                        name="vida" 
-                        id="vida-{{ $vida['id'] }}" 
-                        value="{{ $vida['id'] }}" 
-                        data-quantity="{{ $vida['lives_quantity'] }}" 
-                        data-price="{{ $vida['price'] }}">
-                    <label class="form-check-label" for="vida-{{ $vida['id'] }}">
-                        <strong>Cantidad:</strong> {{ $vida['lives_quantity'] }} vida, 
-                        <strong>Precio:</strong> ${{ number_format($vida['price'], 2) }}
-                    </label>
-                </div>
+            <div class="form-check mb-3">
+                <input
+                    class="form-check-input vida-radio"
+                    type="radio"
+                    name="vida"
+                    id="vida-{{ $vida['id'] }}"
+                    value="{{ $vida['id'] }}"
+                    data-quantity="{{ $vida['lives_quantity'] }}"
+                    data-price="{{ $vida['price'] }}">
+                <label class="form-check-label" for="vida-{{ $vida['id'] }}">
+                    <strong>Cantidad:</strong> {{ $vida['lives_quantity'] }} vida,
+                    <strong>Precio:</strong> ${{ number_format($vida['price'], 2) }}
+                </label>
+            </div>
             @endforeach
             <div id="confirmButtonContainer" class="mt-3" style="display: none;">
-                <button type="button" id="confirmButton" class="btn btn-success w-100">Confirmar</button>
+                <button type="button" id="confirmButton" class="btn btn-confirmar-compra w-100">Confirmar</button>
             </div>
+            <div id="wallet_container"></div>
         </div>
     </div>
 </div>
 
 @endsection
-
 @push('scripts')
 <script>
-  const MERCADO_PAGO_PUBLIC_KEY = "{{ env('MERCADO_PAGO_PUBLIC_KEY') }}";
-  const CSRF_TOKEN = "{{ csrf_token() }}";
+    const MERCADO_PAGO_PUBLIC_KEY = "{{ env('MERCADO_PAGO_PUBLIC_KEY') }}";
+    const CSRF_TOKEN = "{{ csrf_token() }}";
 </script>
 <script src="{{ asset('js/jquery-3.7.1.js') }}"></script>
 <script src="{{ asset('js/MercadoPago.js') }}"></script>

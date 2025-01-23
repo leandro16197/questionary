@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/mercadopago/webhook', [MercadoPagoController::class, 'webhook']);
     
     Route::get('/market',[LifeController::class,'getLife'])->name('vidas.get');
+
+    
 });
 
 require __DIR__ . '/auth.php';

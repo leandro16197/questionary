@@ -521,3 +521,36 @@ body {
       font-size: 0.9rem;
   }
 }
+
+.vida-radio {
+  display: none;
+}
+
+.form-check {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: rgba(155, 155, 155, 0.38);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+
+}
+
+
+.form-check:hover {
+  background: linear-gradient(to right, rgba(79, 53, 150, 0.57), rgba(55, 83, 95, 0.38));
+  border-color: #007bff;
+}
+
+
+.vida-radio:checked + .form-check-label {
+  color: white;
+  border-color: #007bff;
+  font-weight: bold;
+}
+.btn-confirmar-compra{
+  background: linear-gradient(to right, rgba(79, 53, 150, 0.57), rgba(55, 83, 95, 0.38));
+}
