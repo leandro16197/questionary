@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Responses::class);//carga respuestas
         $this->call(ImgGeneros::class);//agrega imagenes a los generos
         $this->call(LifePurchaseSeeder::class);//agrega los valores a la tabla de vidas
+        $this->call(Max_Vidas_Seeder::class);//agrega el maximo de vidas gratis que puede recuperar
     }
 }

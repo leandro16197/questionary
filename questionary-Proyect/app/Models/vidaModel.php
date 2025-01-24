@@ -8,6 +8,6 @@ class vidaModel extends Model
 {   
     protected $table='vidas';
     protected $fillable = [
-        'id','vidas','user_id' 
+        'id','vidas','user_id','max_vidas','last_updated' 
     ];
 }
