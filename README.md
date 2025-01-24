@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Quiz Game
+=======
+# Questionary Game
+>>>>>>> f7ce9542c7d24e9ef74ada78f0cf3d8fae0bfe31
 
 This application is a trivia game built with **Laravel 11.37.0** and **MySQL**, using **Docker** for containerization. It is inspired by the popular game "Preguntados," where players answer multiple-choice questions across different categories to test their knowledge.
 
