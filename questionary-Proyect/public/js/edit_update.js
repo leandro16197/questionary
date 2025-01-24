@@ -271,14 +271,11 @@ $(document).ready(function () {
     $('body').on('click', '#guardar-cambios', function () {
         var generoId = $('#genero-id').val();
         var generoNombre = $('#genero-name').val();
-
-
         if (!generoNombre) {
             alert('Por favor, ingresa un nombre para el género');
             return;
         }
-
-        fetch('/api/generos/' + generoId, {
+        fetch('/api/generos/modificar' + generoId, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -296,9 +293,6 @@ $(document).ready(function () {
             .catch(error => {
                 console.log('Error al actualizar el género:', error);
             });
-        
-
-
 
     });
 

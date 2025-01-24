@@ -554,3 +554,6 @@ body {
 .btn-confirmar-compra{
   background: linear-gradient(to right, rgba(79, 53, 150, 0.57), rgba(55, 83, 95, 0.38));
 }
+.login-style{
+  width: 300px !important;
+}

@@ -135,7 +135,7 @@ class generosController extends Controller
     public function update(Request $request, $id)
     {
         $genero = Generos::find($id);
-
+        
         if (!$genero) {
             return response()->json(['message' => 'Género no encontrado'], 404);
         }
@@ -143,6 +143,6 @@ class generosController extends Controller
         $genero->name = $request->input('nombre');
         $genero->save();
 
-        return response()->json(['message' => 'Género actualizado con éxito', 'genero' => $genero]);
+        return response()->json(['message' => 'Género actualizado con éxito'],201);
     }
 }

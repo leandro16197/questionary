@@ -9,9 +9,9 @@ Route::get('/generos',[generosController::class,'index']);
 
 Route::get('/generos/{id}', [generosController::class,'show']);
 
-Route::post('/generos', [generosController::class,'store']);
+Route::post('/generos/agregar', [generosController::class,'store']);
 
-Route::put('/generos/{id}', [generosController::class, 'update']);
+Route::put('/generos/modificar/{id}', [generosController::class, 'update']);
 
 Route::delete('/generos/{id}', [generosController::class, 'delete']);
 
