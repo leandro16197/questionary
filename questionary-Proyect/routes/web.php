@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\generosController;
 use App\Http\Controllers\QuestionaryController;
 use App\Http\Controllers\LifeController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\MercadoPagoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,20 +47,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/create-preference', [MercadoPagoController::class, 'createPreference']);
     
-    Route::get('/success', function () {
-        return '¡Pago exitoso!';
-    })->name('success');
+    Route::get('/success', [PagoController::class, 'success'])->name('success');
     
-    Route::get('/failure', function () {
-        return 'El pago falló.';
-    })->name('failure');
+    Route::get('/failure', [PagoController::class, 'failure'])->name('failure');
     
-    Route::get('/pending', function () {
-        return 'El pago está pendiente.';
-    })->name('pending');
+    Route::get('/pending', [PagoController::class, 'pending'])->name('pending');
 
     Route::post('/mercadopago/webhook', [MercadoPagoController::class, 'webhook']);
-    
     Route::get('/market',[LifeController::class,'getLife'])->name('vidas.get');
 
     

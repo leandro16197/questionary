@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Pagos extends Model
 {
     use HasFactory;
-
+    protected $table = 'pagos';
     protected $fillable = [
         'user_id',
         'life_purchase_option_id',
@@ -17,4 +17,13 @@ class Pagos extends Model
         'payment_method',
         'preference_id',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function lifePurchaseOption()
+{
+    return $this->belongsTo(LifePurchaseOption::class);
+}
+
 }

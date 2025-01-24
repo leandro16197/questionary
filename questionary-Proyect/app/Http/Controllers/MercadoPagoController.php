@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use DragonCode\Contracts\Cashier\Config\Payment;
+
 class MercadoPagoController extends Controller
 {
     public function createPreference(Request $request)
@@ -19,6 +22,7 @@ class MercadoPagoController extends Controller
 
         $id = $request->input('vidaId'); 
         $dato=LifePurchaseOption::select('price')->where('id',$id)->first();
+        
         $client = new PreferenceClient();
         $preference = $client->create([
             "items" => [
@@ -29,14 +33,25 @@ class MercadoPagoController extends Controller
                 ]
             ],
             "back_urls" => [
-                "success" => route('success'),
+                "success" => route('success', ['vidaId' => $request->input('vidaId')]),
                 "failure" => route('failure'),
                 "pending" => route('pending'),
             ],
             "auto_return" => "approved",
         ]);    
-      
+        $user = Auth::user();
 
+        $pago = Pagos::create([
+            'user_id' => $user->id,
+            'life_purchase_option_id' => $id,  
+            'amount' => $dato->price, 
+            'payment_status' => 'Pago',  
+            'payment_method' => 'mercadopago',  
+            'preference_id'  => $preference->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        
         return response()->json([
             "preferenceId" => $preference->id,
         ]);
